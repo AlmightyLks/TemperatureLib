@@ -1,4 +1,4 @@
-﻿using TemperatureLib.Converter;
+﻿using TemperatureLib.Converters;
 using TemperatureLib.Models;
 
 namespace TemperatureLib.Testing
@@ -7,17 +7,24 @@ namespace TemperatureLib.Testing
     {
         static void Main(string[] args)
         {
-            Temperature temperatureCelsius = new Temperature(TemparatureUnit.Celsius, new CelsiusConverter());
-            temperatureCelsius.Value = 15.5M;
+            // A default converter already has a celsius converter due to it being its base unit.
+            Converter converter = new Converter();
+            // Add a converter for my unit.
+            converter.Converters.Add(TemparatureUnit.Fahrenheit, new FahrenheitConverter());
 
-            var valueInFahrenheit = temperatureCelsius.To(TemparatureUnit.Fahrenheit);
+            // ----------------------------------------------------------------
 
+            Temperature celsiusTemperature = new Temperature(TemparatureUnit.Celsius, converter);
+            celsiusTemperature.Value = 10.0M;
 
+            decimal fahrenheitConversion = celsiusTemperature.To(TemparatureUnit.Fahrenheit);
 
-            Temperature temperatureFahrenheit = new Temperature(TemparatureUnit.Fahrenheit, new FahrenheitConverter());
-            temperatureFahrenheit.Value = 65.5M;
+            // ----------------------------------------------------------------
 
-            var valueInCelsius = temperatureFahrenheit.To(TemparatureUnit.Celsius);
+            Temperature fahrenheitTemperature = new Temperature(TemparatureUnit.Fahrenheit, converter);
+            fahrenheitTemperature.Value = 10.0M;
+
+            decimal celsiusConversion = fahrenheitTemperature.To(TemparatureUnit.Celsius);
         }
     }
 }

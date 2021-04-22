@@ -4,6 +4,7 @@ namespace TemperatureLib.Models
 {
     public interface IConverter
     {
-        Func<decimal, decimal> GetConversionFunc(TemparatureUnit toUnit);
+        decimal ConvertToUnit(TemparatureUnit toUnit, decimal input);
+        decimal ConvertToCelsius(TemparatureUnit fromUnit, decimal input);
     }
 }
