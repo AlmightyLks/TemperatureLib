@@ -1,4 +1,5 @@
-﻿using TemperatureLib.Converters;
+﻿using System.Collections.Generic;
+using TemperatureLib.Converters;
 using TemperatureLib.Models;
 
 namespace TemperatureLib.Testing
@@ -7,32 +8,32 @@ namespace TemperatureLib.Testing
     {
         static void Main(string[] args)
         {
-            // A default converter already has a celsius converter due to it being its base unit.
-            Converter converter = new Converter();
-            // Add a converter for my unit.
-            converter.Converters.Add(TemparatureUnit.Fahrenheit, new FahrenheitConverter());
-            converter.Converters.Add(TemparatureUnit.Kelvin, new KelvinConverter());
+            Dictionary<TemparatureUnit, ITemperatureConverter> temperatureConverters = new Dictionary<TemparatureUnit, ITemperatureConverter>();
+            temperatureConverters.Add(TemparatureUnit.Celsius, new CelsiusConverter());
+            temperatureConverters.Add(TemparatureUnit.Fahrenheit, new FahrenheitConverter());
+            temperatureConverters.Add(TemparatureUnit.Kelvin, new KelvinConverter());
+            Converter converter = new Converter(temperatureConverters);
 
             // ----------------------------------------------------------------
 
             Temperature celsiusTemperature = new Temperature(TemparatureUnit.Celsius, converter);
-            celsiusTemperature.Value = 10.0M;
+            celsiusTemperature.Value = 10.0d;
 
-            decimal celsiusToFahrenheit = celsiusTemperature.To(TemparatureUnit.Fahrenheit);
+            double celsiusToFahrenheit = celsiusTemperature.To(TemparatureUnit.Fahrenheit);
 
             // ----------------------------------------------------------------
 
             Temperature fahrenheitTemperature = new Temperature(TemparatureUnit.Fahrenheit, converter);
-            fahrenheitTemperature.Value = 10.0M;
+            fahrenheitTemperature.Value = 10.0d;
 
-            decimal fahrenheitToCelsius = fahrenheitTemperature.To(TemparatureUnit.Celsius);
+            double fahrenheitToCelsius = fahrenheitTemperature.To(TemparatureUnit.Celsius);
 
             // ----------------------------------------------------------------
 
             Temperature kelvinTemperature = new Temperature(TemparatureUnit.Kelvin, converter);
-            kelvinTemperature.Value = 10.0M;
+            kelvinTemperature.Value = 10.0d;
 
-            decimal kelvinToFahrenheit = kelvinTemperature.To(TemparatureUnit.Fahrenheit);
+            double kelvinToFahrenheit = kelvinTemperature.To(TemparatureUnit.Fahrenheit);
         }
     }
 }

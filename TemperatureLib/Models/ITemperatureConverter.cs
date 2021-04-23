@@ -8,7 +8,7 @@ namespace TemperatureLib.Models
 {
     public interface ITemperatureConverter
     {
-        decimal FromUnitToCelsius(decimal input);
-        decimal FromCelsiusToUnit(decimal input);
+        double FromUnitToCelsius(double input);
+        double FromCelsiusToUnit(double input);
     }
 }

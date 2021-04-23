@@ -5,14 +5,14 @@ namespace TemperatureLib.Converters
 {
     public class FahrenheitConverter : ITemperatureConverter
     {
-        public decimal FromUnitToCelsius(decimal input)
+        public double FromUnitToCelsius(double input)
         {
             return (input - 32) * 5 / 9;
         }
 
-        public decimal FromCelsiusToUnit(decimal input)
+        public double FromCelsiusToUnit(double input)
         {
-            decimal foo = (input * 9 / 5) + 32;
+            double foo = (input * 9 / 5) + 32;
             return foo;
         }
     }

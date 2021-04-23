@@ -3,17 +3,17 @@
     public class Temperature
     {
         public TemparatureUnit Unit { get; }
-        public decimal Value { get; set; }
+        public double Value { get; set; }
         private IConverter _converter;
 
         public Temperature(TemparatureUnit unit, IConverter converter)
         {
             Unit = unit;
             _converter = converter;
-            Value = 0.0M;
+            Value = 0.0d;
         }
 
-        public decimal To(TemparatureUnit toUnit)
+        public double To(TemparatureUnit toUnit)
         {
             return _converter.Convert(Unit, Value, toUnit);
         }

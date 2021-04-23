@@ -4,6 +4,6 @@ namespace TemperatureLib.Models
 {
     public interface IConverter
     {
-        decimal Convert(TemparatureUnit fromUnit, decimal input, TemparatureUnit toUnit);
+        double Convert(TemparatureUnit fromUnit, double input, TemparatureUnit toUnit);
     }
 }

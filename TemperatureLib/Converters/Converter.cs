@@ -9,16 +9,23 @@ namespace TemperatureLib.Converters
 {
     public class Converter : IConverter
     {
-        public Dictionary<TemparatureUnit, ITemperatureConverter> Converters { get; }
-        public Converter()
+        private Dictionary<TemparatureUnit, ITemperatureConverter> _converters;
+        public Converter(IDictionary<TemparatureUnit, ITemperatureConverter> converters)
         {
-            Converters = new Dictionary<TemparatureUnit, ITemperatureConverter>();
-            Converters.Add(TemparatureUnit.Celsius, new CelsiusConverter());
+            _converters = new Dictionary<TemparatureUnit, ITemperatureConverter>(converters);
         }
-        public decimal Convert(TemparatureUnit fromUnit, decimal input, TemparatureUnit toUnit)
+        public bool ContainsConverter(TemparatureUnit unit)
         {
-            var middleCelsius = Converters[fromUnit].FromUnitToCelsius(input);
-            var result = Converters[toUnit].FromCelsiusToUnit(middleCelsius);
+            return _converters.ContainsKey(unit);
+        }
+        public double Convert(TemparatureUnit fromUnit, double input, TemparatureUnit toUnit)
+        {
+            if (fromUnit == toUnit)
+            {
+                throw new ArgumentException("Cannot convert to the same temperature.");
+            }
+            double middleCelsius = _converters[fromUnit].FromUnitToCelsius(input);
+            double result = _converters[toUnit].FromCelsiusToUnit(middleCelsius);
 
             return result;
         }

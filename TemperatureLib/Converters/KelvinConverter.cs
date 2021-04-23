@@ -5,14 +5,14 @@ namespace TemperatureLib.Converters
 {
     public class KelvinConverter : ITemperatureConverter
     {
-        public decimal FromUnitToCelsius(decimal input)
+        public double FromUnitToCelsius(double input)
         {
-            return input - 273.15M;
+            return input - 273.15d;
         }
 
-        public decimal FromCelsiusToUnit(decimal input)
+        public double FromCelsiusToUnit(double input)
         {
-            return input + 273.15M;
+            return input + 273.15d;
         }
     }
 }

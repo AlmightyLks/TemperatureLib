@@ -5,12 +5,12 @@ namespace TemperatureLib.Converters
 {
     public class CelsiusConverter : ITemperatureConverter
     {
-        public decimal FromCelsiusToUnit(decimal input)
+        public double FromCelsiusToUnit(double input)
         {
             return input;
         }
 
-        public decimal FromUnitToCelsius(decimal input)
+        public double FromUnitToCelsius(double input)
         {
             return input;
         }
