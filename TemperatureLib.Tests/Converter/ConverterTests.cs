@@ -1,9 +1,10 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using TemperatureLib.Converters;
 using TemperatureLib.Models;
 
-namespace TemperatureLib.Tests
+namespace TemperatureLib.Tests.Converter
 {
     public class ConverterTests
     {
@@ -15,7 +16,7 @@ namespace TemperatureLib.Tests
             temperatureConverters.Add(TemparatureUnit.Celsius, new CelsiusConverter());
             temperatureConverters.Add(TemparatureUnit.Fahrenheit, new FahrenheitConverter());
             temperatureConverters.Add(TemparatureUnit.Kelvin, new KelvinConverter());
-            _converter = new Converter(temperatureConverters);
+            _converter = new Converters.Converter(temperatureConverters);
         }
 
         [Test]
@@ -53,6 +54,17 @@ namespace TemperatureLib.Tests
             )
         {
             Assert.AreEqual(expectedOutput, _converter.Convert(fromUnit, input, TemparatureUnit.Kelvin), 0.1d);
+        }
+
+        [Test]
+        [TestCase(TemparatureUnit.Celsius)]
+        [TestCase(TemparatureUnit.Fahrenheit)]
+        [TestCase(TemparatureUnit.Kelvin)]
+        public void ThrowsWhenConvertingToSameUnit(
+            TemparatureUnit unit
+            )
+        {
+            Assert.Throws<ArgumentException>(() => { _converter.Convert(unit, 0, unit); });
         }
     }
 }

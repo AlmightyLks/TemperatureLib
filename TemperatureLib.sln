@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureLib", "Temperatu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureLib.Testing", "TemperatureLib.Testing\TemperatureLib.Testing.csproj", "{90C2887A-62C4-4CDA-BF44-59E0F4090B7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemperatureLib.Tests", "TemperatureLib.Tests\TemperatureLib.Tests.csproj", "{EC5DF01A-7DDC-4BAF-9729-4F2F974E0F8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemperatureLib.Tests", "TemperatureLib.Tests\TemperatureLib.Tests.csproj", "{EC5DF01A-7DDC-4BAF-9729-4F2F974E0F8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

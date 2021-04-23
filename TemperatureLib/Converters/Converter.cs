@@ -14,10 +14,6 @@ namespace TemperatureLib.Converters
         {
             _converters = new Dictionary<TemparatureUnit, ITemperatureConverter>(converters);
         }
-        public bool ContainsConverter(TemparatureUnit unit)
-        {
-            return _converters.ContainsKey(unit);
-        }
         public double Convert(TemparatureUnit fromUnit, double input, TemparatureUnit toUnit)
         {
             if (fromUnit == toUnit)
