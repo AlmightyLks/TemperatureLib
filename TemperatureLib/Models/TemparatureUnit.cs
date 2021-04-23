@@ -3,6 +3,7 @@
     public enum TemparatureUnit
     {
         Celsius,
-        Fahrenheit
+        Fahrenheit,
+        Kelvin
     }
 }
