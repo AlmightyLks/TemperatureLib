@@ -15,15 +15,12 @@ namespace TemperatureLib.Converters
             Converters = new Dictionary<TemparatureUnit, ITemperatureConverter>();
             Converters.Add(TemparatureUnit.Celsius, new CelsiusConverter());
         }
-
-        public decimal ConvertToUnit(TemparatureUnit toUnit, decimal input)
+        public decimal Convert(TemparatureUnit fromUnit, decimal input, TemparatureUnit toUnit)
         {
-            return Converters[toUnit].FromCelsiusToUnit(input);
-        }
+            var middleCelsius = Converters[fromUnit].FromUnitToCelsius(input);
+            var result = Converters[toUnit].FromCelsiusToUnit(middleCelsius);
 
-        public decimal ConvertToCelsius(TemparatureUnit fromUnit, decimal input)
-        {
-            return Converters[fromUnit].FromUnitToCelsius(input);
+            return result;
         }
     }
 }

@@ -29,10 +29,10 @@ namespace TemperatureLib.Testing
 
             // ----------------------------------------------------------------
 
-            Temperature kelvinTemperature = new Temperature(TemparatureUnit.Fahrenheit, converter);
+            Temperature kelvinTemperature = new Temperature(TemparatureUnit.Kelvin, converter);
             kelvinTemperature.Value = 10.0M;
 
-            decimal kelvinToCelsius = fahrenheitTemperature.To(TemparatureUnit.Kelvin);
+            decimal kelvinToFahrenheit = kelvinTemperature.To(TemparatureUnit.Fahrenheit);
         }
     }
 }
