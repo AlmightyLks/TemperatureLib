@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Temperature\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TemperatureLib\TemperatureLib.csproj" />
   </ItemGroup>
 

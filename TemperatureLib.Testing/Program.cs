@@ -13,27 +13,23 @@ namespace TemperatureLib.Testing
             temperatureConverters.Add(TemparatureUnit.Fahrenheit, new FahrenheitConverter());
             temperatureConverters.Add(TemparatureUnit.Kelvin, new KelvinConverter());
             Converter converter = new Converter(temperatureConverters);
+            // ----------------------------------------------------------------
+
+            double celsiusTemperature = 10.0d;
+
+            double celsiusToFahrenheit = converter.Convert(TemparatureUnit.Celsius, celsiusTemperature, TemparatureUnit.Fahrenheit);
 
             // ----------------------------------------------------------------
 
-            Temperature celsiusTemperature = new Temperature(TemparatureUnit.Celsius, converter);
-            celsiusTemperature.Value = 10.0d;
+            double fahrenheitTemperature = 10.0d;
 
-            double celsiusToFahrenheit = celsiusTemperature.To(TemparatureUnit.Fahrenheit);
-
-            // ----------------------------------------------------------------
-
-            Temperature fahrenheitTemperature = new Temperature(TemparatureUnit.Fahrenheit, converter);
-            fahrenheitTemperature.Value = 10.0d;
-
-            double fahrenheitToCelsius = fahrenheitTemperature.To(TemparatureUnit.Celsius);
+            double fahrenheitToCelsius = converter.Convert(TemparatureUnit.Fahrenheit, fahrenheitTemperature, TemparatureUnit.Celsius);
 
             // ----------------------------------------------------------------
 
-            Temperature kelvinTemperature = new Temperature(TemparatureUnit.Kelvin, converter);
-            kelvinTemperature.Value = 10.0d;
+            double kelvinTemperature = 10.0d;
 
-            double kelvinToFahrenheit = kelvinTemperature.To(TemparatureUnit.Fahrenheit);
+            double kelvinToFahrenheit = converter.Convert(TemparatureUnit.Kelvin, kelvinTemperature, TemparatureUnit.Fahrenheit);
         }
     }
 }

@@ -11,46 +11,48 @@ namespace TemperatureLib.Tests.Converter
 {
     public class TemperatureConverterTests
     {
+        private const double InputValue = 10.0d;
+        private const double Tolerance = 0.1d;
         [Test]
-        [TestCase(10.0, -12.22)]
+        [TestCase(InputValue, -12.22)]
         public void FromFahrenheitToCelsius(
             double input,
             double expectedOutput
             )
         {
             ITemperatureConverter converter = new FahrenheitConverter();
-            Assert.AreEqual(expectedOutput, converter.FromUnitToCelsius(input), 0.1d);
+            Assert.AreEqual(expectedOutput, converter.FromUnitToCelsius(input), Tolerance);
         }
         [Test]
-        [TestCase(10.0, 50.0)]
+        [TestCase(InputValue, 50.0)]
         public void FromCelsiusToFahrenheit(
             double input,
             double expectedOutput
             )
         {
             ITemperatureConverter converter = new FahrenheitConverter();
-            Assert.AreEqual(expectedOutput, converter.FromCelsiusToUnit(input), 0.1d);
+            Assert.AreEqual(expectedOutput, converter.FromCelsiusToUnit(input), Tolerance);
         }
 
         [Test]
-        [TestCase(10.0, -263.15)]
+        [TestCase(InputValue, -263.15)]
         public void FromKelvinToCelsius(
             double input,
             double expectedOutput
             )
         {
             ITemperatureConverter converter = new KelvinConverter();
-            Assert.AreEqual(expectedOutput, converter.FromUnitToCelsius(input), 0.1d);
+            Assert.AreEqual(expectedOutput, converter.FromUnitToCelsius(input), Tolerance);
         }
         [Test]
-        [TestCase(10.0, 283.15)]
+        [TestCase(InputValue, 283.15)]
         public void FromCelsiusToKelvin(
             double input,
             double expectedOutput
             )
         {
             ITemperatureConverter converter = new KelvinConverter();
-            Assert.AreEqual(expectedOutput, converter.FromCelsiusToUnit(input), 0.1d);
+            Assert.AreEqual(expectedOutput, converter.FromCelsiusToUnit(input), Tolerance);
         }
     }
 }

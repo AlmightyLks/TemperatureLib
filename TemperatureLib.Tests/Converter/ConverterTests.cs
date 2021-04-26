@@ -9,7 +9,11 @@ namespace TemperatureLib.Tests.Converter
     public class ConverterTests
     {
         private IConverter _converter;
-        [SetUp]
+
+        private const double InputValue = 10.0d;
+        private const double Tolerance = 0.1d;
+
+        [OneTimeSetUp]
         public void Setup()
         {
             var temperatureConverters = new Dictionary<TemparatureUnit, ITemperatureConverter>();
@@ -20,51 +24,36 @@ namespace TemperatureLib.Tests.Converter
         }
 
         [Test]
-        [TestCase(TemparatureUnit.Fahrenheit, 10.0, -12.22)]
-        [TestCase(TemparatureUnit.Kelvin, 10.0, -263.15)]
-        public void ConvertToCelsius(
+        [TestCase(TemparatureUnit.Fahrenheit, InputValue, TemparatureUnit.Celsius, -12.22)]
+        [TestCase(TemparatureUnit.Kelvin, InputValue, TemparatureUnit.Celsius, -263.15)]
+        [TestCase(TemparatureUnit.Celsius, InputValue, TemparatureUnit.Fahrenheit, 50.0)]
+        [TestCase(TemparatureUnit.Kelvin, InputValue, TemparatureUnit.Fahrenheit, -441.67)]
+        [TestCase(TemparatureUnit.Celsius, InputValue, TemparatureUnit.Kelvin, 283.15)]
+        [TestCase(TemparatureUnit.Fahrenheit, InputValue, TemparatureUnit.Kelvin, 260.928)]
+        public void ConvertToExpectedValue(
             TemparatureUnit fromUnit,
             double input,
+            TemparatureUnit toUnit,
             double expectedOutput
             )
         {
-            Assert.AreEqual(expectedOutput, _converter.Convert(fromUnit, input, TemparatureUnit.Celsius), 0.1d);
-        }
-
-        [Test]
-        [TestCase(TemparatureUnit.Celsius, 10.0, 50.0)]
-        [TestCase(TemparatureUnit.Kelvin, 10.0, -441.67)]
-        public void ConvertToFahrenheit(
-            TemparatureUnit fromUnit,
-            double input,
-            double expectedOutput
-            )
-        {
-            Assert.AreEqual(expectedOutput, _converter.Convert(fromUnit, input, TemparatureUnit.Fahrenheit), 0.1d);
-
-        }
-
-        [Test]
-        [TestCase(TemparatureUnit.Celsius, 10.0, 283.15)]
-        [TestCase(TemparatureUnit.Fahrenheit, 10.0, 260.928)]
-        public void ConvertToKelvin(
-            TemparatureUnit fromUnit,
-            double input,
-            double expectedOutput
-            )
-        {
-            Assert.AreEqual(expectedOutput, _converter.Convert(fromUnit, input, TemparatureUnit.Kelvin), 0.1d);
+            //Arrange & Act
+            double actual = _converter.Convert(fromUnit, input, toUnit);
+            //Assert
+            Assert.AreEqual(expectedOutput, actual, Tolerance);
         }
 
         [Test]
         [TestCase(TemparatureUnit.Celsius)]
         [TestCase(TemparatureUnit.Fahrenheit)]
         [TestCase(TemparatureUnit.Kelvin)]
-        public void ThrowsWhenConvertingToSameUnit(
-            TemparatureUnit unit
-            )
+        public void ThrowsWhenConvertingToSameUnit(TemparatureUnit unit)
         {
-            Assert.Throws<ArgumentException>(() => { _converter.Convert(unit, 0, unit); });
+            // Arrange
+            TestDelegate convertToTheSameUnit = () => _converter.Convert(unit, 0, unit);
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(convertToTheSameUnit);
         }
     }
 }
